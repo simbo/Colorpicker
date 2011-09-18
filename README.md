@@ -1,10 +1,11 @@
+
 Colorpicker
 ================================================================================
 
 A HTML5 Colorpicker using jQuery
 
-Author: Simon Lepel
+Author: Simon Lepel  
 License: GPL
 
-See demo.html for example.
+See `demo.html` for an example.
 
