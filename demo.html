@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Colorpicker Demo</title>
+	<meta name="author" content="Simon Lepel">
+	<link rel="stylesheet" href="colorpicker.css">
+	<style>
+		body {
+			background:#000;
+		}
+		#picker {
+			width:100px;
+		}
+		.colorpicker-indicator {
+			margin:0 auto;
+			width:50px;
+			height:50px;
+			border: 3px solid #fff;
+			-webkit-border-radius:50px;
+			-moz-border-radius:50px;
+			border-radius:50px;
+			-webkit-box-shadow: 0px 0px 75px 0px #808080;
+			-moz-box-shadow: 0px 0px 75px 0px #808080;
+			box-shadow: 0px 0px 75px 0px #808080;
+		}
+	</style>
+	<script src="jquery.js"></script>
+	<script src="jquery-ui-draggable.js"></script>
+	<script src="colorpicker.js"></script>
+	<script>
+		$(document).ready(function(){
+		
+			// initialize colorpicker with custom options
+			var cp = new Colorpicker({
+				// selected color
+				color: [0,0,0],
+				// function to run on changing colors
+				onChange: function(cp) {
+					$('body').css({ background: '#'+cp.hex });
+					$('.colorpicker-indicator').css({ 'border-color': 'rgb('+(255-cp.rgb[0])+','+(255-cp.rgb[1])+','+(255-cp.rgb[2])+')' })
+				},
+				// function to run on picking a color
+				onPick: this.onChange
+			});
+			
+			// inject colorpicker field
+			$('#picker').append( cp.getIndicator() );
+			
+			// center colorpicker field on screen
+			$(window).resize(function() {
+				$('#picker').css({
+					position: 'absolute',
+					left: ($(window).width()-$('#picker').outerWidth())/2+$(window).scrollLeft()+'px',
+					top: ($(window).height()-$('#picker').outerHeight())/2+$(window).scrollTop()-$(window).height()/10+'px'
+				});
+			}).resize();
+
+		});
+	</script>
+</head>
+<body>
+	<div id="picker"></div>
+</body>
+</html>

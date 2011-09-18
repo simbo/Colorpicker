@@ -1,0 +1,263 @@
+.colorpicker-container * {
+	padding:0;
+	margin:0;
+	border:none;
+	vertical-align: baseline;
+	font:12px/1 sans-serif;
+}
+
+.colorpicker-drag-container {
+	z-index:3;
+	position:absolute;
+	padding:20px;
+	background:rgba(192,192,192,0.5);
+	-webkit-border-radius:40px;
+	-moz-border-radius:40px;
+	border-radius:40px;
+	cursor:move;
+}
+
+.colorpicker-drag-container:hover {
+	background:rgba(160,160,160,0.5);
+}
+
+.colorpicker-container {
+	cursor:default;
+	position:relative;
+	background:#fff;
+	text-align:left;
+	width:482px;
+	height:296px;
+	box-shadow: 0 0 10px 0 #222;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	border-radius:20px;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.colorpicker-container form {
+	margin:20px 20px 0 20px;
+	width:120px;
+	clear:right;
+	float:right;
+}
+
+.colorpicker-container fieldset.rgb {
+	width:70px;
+	float:left;
+}
+
+.colorpicker-container fieldset.hsv {
+	width:50px;
+}
+
+.colorpicker-container fieldset.hex {
+	margin:15px 0 0 0;
+}
+
+.colorpicker-container fieldset label,
+.colorpicker-container fieldset input {
+	font-size:12px;
+	font-family:sans-serif;
+	line-height:18px;
+	color:#444;
+	height:18px;
+	text-align:left;
+	border:1px solid transparent;
+	background:transparent;
+}
+
+.colorpicker-container fieldset label {
+	display:block;
+	float:left;
+	clear:left;
+	text-align:right;
+	width:10px;
+	cursor:default;
+}
+
+.colorpicker-container fieldset input {
+	vertical-align: middle;
+	width:35px;
+	text-indent:3px;
+}
+
+.colorpicker-container fieldset input:focus {
+	background:#ffc;
+	color:#000;
+	border-color:#ccc;
+}
+
+.colorpicker-container fieldset input.invalid,
+.colorpicker-container fieldset input.invalid:focus {
+	background:#b21414;
+	color:#fff;
+	border-color:#b21414;
+	-moz-box-shadow: 0px 0px 10px red;
+	-webkit-box-shadow: 0px 0px 10px red;
+	box-shadow: 0px 0px 10px red;
+}
+
+.colorpicker-container fieldset input.invalid:focus {
+	color:#000;
+	background:#ffc;
+}
+
+.colorpicker-container fieldset.hex input {
+	width:60px;
+}
+
+.colorpicker-container .sv,
+.colorpicker-container .hue {
+	margin:20px 0 20px 20px;
+	float:left;
+	position:relative;
+}
+
+.colorpicker-container .sv .sel,
+.colorpicker-container .hue .sel,
+.colorpicker-container .sv .ind,
+.colorpicker-container .hue .ind,
+.colorpicker-container .sv .over,
+.colorpicker-container .hue .over {
+	pointer-events:none;
+	cursor:crosshair;
+	position:absolute;
+}
+
+.colorpicker-container .sv .sel,
+.colorpicker-container .hue .sel {
+	z-index:1;
+	top:0;
+	left:0;
+}
+
+.colorpicker-container .sv .ind,
+.colorpicker-container .hue .ind {
+	z-index:3;
+}
+
+.colorpicker-container .sv .ind {
+	width:20px;
+	height:20px;
+	background:transparent url('indicator-sv.png') left top no-repeat;
+}
+
+.colorpicker-container .hue .ind {
+	width:18px;
+	height:12px;
+	background:url('indicator-h-left.png') left top no-repeat,
+		transparent url('indicator-h-right.png') right top no-repeat;
+}
+
+.colorpicker-container .sv .over,
+.colorpicker-container .hue .over {
+	pointer-events:auto;
+	z-index:2;
+	top:0;
+	left:0;
+	-webkit-box-shadow: inset 1px 1px 3px 0 #222;
+	-moz-box-shadow: inset 1px 1px 3px 0 #222;
+	box-shadow: inset 1px 1px 3px 0 #222;
+}
+
+.colorpicker-container .color {
+	margin:20px 20px 0 20px;
+	position:relative;
+	float:right;
+}
+
+.colorpicker-container .color .last,
+.colorpicker-container .color .curr {
+	float:left;
+	z-index:1;
+	width:60px;
+	height:60px;
+}
+
+.colorpicker-container .color .last {
+	cursor:pointer;
+}
+
+.colorpicker-container .color .over {
+	pointer-events:none;
+	z-index:2;
+	position:absolute;
+	top:0;
+	left:0;
+	width:120px;
+	height:60px;
+	-webkit-box-shadow: inset 1px 1px 3px 0 #222;
+	-moz-box-shadow: inset 1px 1px 3px 0 #222;
+	box-shadow: inset 1px 1px 3px 0 #222;
+}
+
+.colorpicker-container .fields {
+	position:absolute;
+	bottom:20px;
+	right:20px;
+	width:120px;
+	height:60px;
+	background:#eee;
+	overflow:hidden;
+}
+
+.colorpicker-container .fields .f,
+.colorpicker-container .fields .button {
+	z-index:1;
+	float:left;
+	width:20px;
+	height:20px;
+	cursor:pointer;
+}
+
+.colorpicker-container .fields .button {
+	background:transparent url('plus.png') left top no-repeat;
+}
+
+.colorpicker-container .fields .over {
+	pointer-events:none;
+	z-index:2;
+	position:absolute;
+	top:0;
+	left:0;
+	width:120px;
+	height:60px;
+	-webkit-box-shadow: inset 1px 1px 3px 0 #222;
+	-moz-box-shadow: inset 1px 1px 3px 0 #222;
+	box-shadow: inset 1px 1px 3px 0 #222;
+}
+
+.colorpicker-container .accept,
+.colorpicker-container .cancel {
+	z-index:3;
+	position:absolute;
+	top:40px;
+	left:357px;
+	background:transparent url('accept.png') left top no-repeat;
+	cursor:pointer;
+	width:29px;
+	height:22px;
+	opacity:0.5;
+}
+
+.colorpicker-container .cancel {
+	background-image:url('cancel.png');
+	left:420px;
+	width:22px;
+}
+
+.colorpicker-container .accept:hover,
+.colorpicker-container .cancel:hover {
+	opacity:1;
+}
+
+.colorpicker-indicator {
+	width:50px;
+	height:50px;
+	cursor:pointer;
+}
+
