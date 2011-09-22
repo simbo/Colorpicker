@@ -143,14 +143,14 @@
 .colorpicker-container .sv .ind {
 	width:20px;
 	height:20px;
-	background:transparent url('indicator-sv.png') left top no-repeat;
+	background:transparent url('sprites.png') -51px 0 no-repeat;
 }
 
 .colorpicker-container .hue .ind {
 	width:18px;
 	height:12px;
-	background:url('indicator-h-left.png') left top no-repeat,
-		transparent url('indicator-h-right.png') right top no-repeat;
+	background:url('sprites.png') left -52px no-repeat,
+		transparent url('sprites.png') right -40px no-repeat;
 }
 
 .colorpicker-container .sv .over,
@@ -215,7 +215,7 @@
 }
 
 .colorpicker-container .fields .button {
-	background:transparent url('plus.png') left top no-repeat;
+	background:transparent url('sprites.png') -51px -20px no-repeat;
 }
 
 .colorpicker-container .fields .over {
@@ -237,17 +237,18 @@
 	position:absolute;
 	top:40px;
 	left:357px;
-	background:transparent url('accept.png') left top no-repeat;
+	background:transparent url('sprites.png') 0 0 no-repeat;
 	cursor:pointer;
 	width:29px;
-	height:22px;
+	height:24px;
 	opacity:0.5;
 }
 
 .colorpicker-container .cancel {
-	background-image:url('cancel.png');
+	background:transparent url('sprites.png') -29px 0 no-repeat;
 	left:420px;
 	width:22px;
+	height:22px;
 }
 
 .colorpicker-container .accept:hover,
