@@ -68,6 +68,7 @@
 	text-align:left;
 	border:1px solid transparent;
 	background:transparent;
+	padding:0;
 }
 
 .colorpicker-container fieldset label {
@@ -117,44 +118,57 @@
 	position:relative;
 }
 
-.colorpicker-container .sv .sel,
-.colorpicker-container .hue .sel,
-.colorpicker-container .sv .ind,
-.colorpicker-container .hue .ind,
-.colorpicker-container .sv .over,
-.colorpicker-container .hue .over {
+.colorpicker-container .sv {
+	width:256px;
+	height:256px;
+}
+
+.colorpicker-container .hue {
+	width:25px;
+	height:256px;
+}
+
+.colorpicker-container .sv .selector,
+.colorpicker-container .hue .selector,
+.colorpicker-container .sv .overlay,
+.colorpicker-container .hue .overlay {
 	pointer-events:none;
 	cursor:crosshair;
 	position:absolute;
 }
 
-.colorpicker-container .sv .sel,
-.colorpicker-container .hue .sel {
+.colorpicker-container .sv canvas,
+.colorpicker-container .hue canvas {
+	position:absolute;
+}
+
+.colorpicker-container .sv canvas,
+.colorpicker-container .hue canvas {
 	z-index:1;
 	top:0;
 	left:0;
 }
 
-.colorpicker-container .sv .ind,
-.colorpicker-container .hue .ind {
+.colorpicker-container .sv .selector,
+.colorpicker-container .hue .selector {
 	z-index:3;
 }
 
-.colorpicker-container .sv .ind {
+.colorpicker-container .sv .selector {
 	width:20px;
 	height:20px;
 	background:transparent url('sprites.png') -51px 0 no-repeat;
 }
 
-.colorpicker-container .hue .ind {
-	width:18px;
+.colorpicker-container .hue .selector {
+	width:37px;
 	height:12px;
 	background:url('sprites.png') left -52px no-repeat,
 		transparent url('sprites.png') right -40px no-repeat;
 }
 
-.colorpicker-container .sv .over,
-.colorpicker-container .hue .over {
+.colorpicker-container .sv .overlay,
+.colorpicker-container .hue .overlay {
 	pointer-events:auto;
 	z-index:2;
 	top:0;
@@ -164,25 +178,25 @@
 	box-shadow: inset 1px 1px 3px 0 #222;
 }
 
-.colorpicker-container .color {
+.colorpicker-container .indicator {
 	margin:20px 20px 0 20px;
 	position:relative;
 	float:right;
 }
 
-.colorpicker-container .color .last,
-.colorpicker-container .color .curr {
+.colorpicker-container .indicator .last,
+.colorpicker-container .indicator .current {
 	float:left;
 	z-index:1;
 	width:60px;
 	height:60px;
 }
 
-.colorpicker-container .color .last {
+.colorpicker-container .indicator .last {
 	cursor:pointer;
 }
 
-.colorpicker-container .color .over {
+.colorpicker-container .indicator .overlay {
 	pointer-events:none;
 	z-index:2;
 	position:absolute;
@@ -205,8 +219,8 @@
 	overflow:hidden;
 }
 
-.colorpicker-container .fields .f,
-.colorpicker-container .fields .button {
+.colorpicker-container .fields .field,
+.colorpicker-container .fields .add {
 	z-index:1;
 	float:left;
 	width:20px;
@@ -214,11 +228,11 @@
 	cursor:pointer;
 }
 
-.colorpicker-container .fields .button {
+.colorpicker-container .fields .add {
 	background:transparent url('sprites.png') -51px -20px no-repeat;
 }
 
-.colorpicker-container .fields .over {
+.colorpicker-container .fields .overlay {
 	pointer-events:none;
 	z-index:2;
 	position:absolute;
@@ -254,11 +268,5 @@
 .colorpicker-container .accept:hover,
 .colorpicker-container .cancel:hover {
 	opacity:1;
-}
-
-.colorpicker-indicator {
-	width:50px;
-	height:50px;
-	cursor:pointer;
 }
 

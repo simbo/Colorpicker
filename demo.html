@@ -6,60 +6,137 @@
 	<meta name="author" content="Simon Lepel">
 	<link rel="stylesheet" href="colorpicker.css">
 	<style>
-		body {
-			background:#000;
+		body, input { background:#fff; color:#444; font-family:sans-serif; font-size:13px; line-height:1.231em; padding:0; margin:40px; }
+		a {	color:#06d;	text-decoration:none; }
+		h1 { font-size:1.6em; margin:0 0 1em 0; }
+		h2 { font-size:1.2em; margin:3em 0 1em 0; clear:both; }
+		p { clear:both; margin:1em 0; padding:0; }
+		code { color:#666; background:#eee; padding:0 0.2em; }
+		input { margin:1em 0 0 0; padding:0.2em; border:1px solid #ccc; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; }
+		
+		.picker {
+			margin:1em 2em 3em 2em;
+			float:left;
+			width:25px;
+			height:25px;
+			cursor:pointer;
+			-webkit-border-radius:25px;
+			-moz-border-radius:25px;
+			border-radius:25px;
+			-webkit-box-shadow: 0px 0px 10px 0px #808080;
+			-moz-box-shadow: 0px 0px 10px 0px #808080;
+			box-shadow: 0px 0px 10px 0px #808080;
 		}
-		#picker {
-			width:100px;
-		}
-		.colorpicker-indicator {
-			margin:0 auto;
-			width:50px;
-			height:50px;
-			border: 3px solid #fff;
-			-webkit-border-radius:50px;
-			-moz-border-radius:50px;
-			border-radius:50px;
-			-webkit-box-shadow: 0px 0px 75px 0px #808080;
-			-moz-box-shadow: 0px 0px 75px 0px #808080;
-			box-shadow: 0px 0px 75px 0px #808080;
-		}
+
 	</style>
 	<script src="jquery.js"></script>
-	<script src="jquery-ui-draggable.js"></script>
+	<script src="jquery-ui.js"></script>
 	<script src="colorpicker.js"></script>
 	<script>
 		$(document).ready(function(){
 		
-			// initialize colorpicker with custom options
-			var cp = new Colorpicker({
-				// selected color
-				color: [0,0,0],
-				// function to run on changing colors
-				onChange: function(cp) {
-					$('body').css({ background: '#'+cp.hex });
-					$('.colorpicker-indicator').css({ 'border-color': 'rgb('+(255-cp.rgb[0])+','+(255-cp.rgb[1])+','+(255-cp.rgb[2])+')' })
-				},
-				// function to run on picking a color
-				onPick: this.onChange
+			// EXAMPLE 1
+			$('#e1').colorpicker();
+			
+			// EXAMPLE 2
+			$('#e2').colorpicker({
+				color: '#ffea00',
+				onAccept: function() {
+					$(this).next('span').html( '<br/>Hex: ' + $.colorpicker.hex + '<br/>RGB: ' + $.colorpicker.rgb.toString() + '<br/>HSV: ' + $.colorpicker.hsv.toString() );
+				}
 			});
+		
+			// EXAMPLE 3
+			$('#e3a,#e3b,#e3c').each(function(){
 			
-			// inject colorpicker field
-			$('#picker').append( cp.getIndicator() );
-			
-			// center colorpicker field on screen
-			$(window).resize(function() {
-				$('#picker').css({
-					position: 'absolute',
-					left: ($(window).width()-$('#picker').outerWidth())/2+$(window).scrollLeft()+'px',
-					top: ($(window).height()-$('#picker').outerHeight())/2+$(window).scrollTop()-$(window).height()/10+'px'
-				});
-			}).resize();
+				$(this).colorpicker({
+					color: function(el) {
+						return $(el).attr( 'data-color' );
+					},
+					onAccept: function() {
+						$(this).attr( 'data-color', $.colorpicker.hex ).css( 'background-color', '#'+$.colorpicker.hex );
+					},
+					position: {
+						of: $(this),
+						at: 'left bottom',
+						my: 'left top',
+						offset: '0 10'
+					}
+				}).css( 'background-color', $(this).attr('data-color') );
+				
+			});
+
+			// EXAMPLE 4
+			$('#e4').colorpicker({
+				color: function(el) {
+					var c = $(el).next('input').val();
+					$('body').css( 'background-color', c );
+					return c;
+				},
+				onChange: function() {
+					$('body').css( 'background-color', '#'+$.colorpicker.hex );
+				},
+				onCancel: function() {
+					$('body').css( 'background-color', '#fff' );
+				},
+				onAccept: function() {
+					$('body').css( 'background-color', '#fff' );
+					$('#e4').css( 'background-color', '#'+$.colorpicker.hex ).next('input').val( '#'+$.colorpicker.hex );
+				}
+			}).css( 'background-color', $('#e4').next('input').val() );
 
 		});
 	</script>
 </head>
 <body>
-	<div id="picker"></div>
+	<h1>Colorpicker Demo</h1>
+	<h2>Usage</h2>
+	<p><code>jQuery('#myElement').colorpicker( <em>options</em> );</code></p>
+	<p>Options:</p>
+	<dl>
+		<dt><code>color</code></dt>
+		<dd>a color (string with hexcode or array with rgb values) or a function that returns a color; default <code>[0,0,0]</code></dd>
+		<dt><code>onAccept</code></dt>
+		<dd>function, triggered when accepted</dd>
+		<dt><code>onCancel</code></dt>
+		<dd>function, triggered when cancelled</dd>
+		<dt><code>onChange</code></dt>
+		<dd>function, triggered when changed</dd>
+		<dt><code>maxFields</code>
+		<dd>max number of color fields; default <code>18</code></dd>
+		<dt><code>position</code></dt>
+		<dd>jquery ui position object for positioning the main container; default centered on screen</dd>
+	</dl>
+	<p>
+		Get sources, download and support for Colorpicker at <a href="http://github.com/simbo/Colorpicker">github.com/simbo/Colorpicker</a>.
+	</p>
+	<h2>Example 1</h2>
+	<p>
+		The simplest way. Default options, no handling.
+	</p>
+	<p>
+		<a href="#" id="e1">pick a color</a>
+	</p>
+	<h2>Example 2</h2>
+	<p>
+		Static value for <code>color</code> and handler for <code>onAccept</code>.
+	</p>
+	<p>
+		<a href="#" id="e2">pick a color</a>
+		<span></span>
+	</p>
+	<h2>Example 3</h2>
+	<p>
+		Multiple Colorpickers with relative position and data handling.
+	</p>
+	<div id="e3a" class="picker" data-color="#f00"></div>
+	<div id="e3b" class="picker" data-color="#0f0"></div>
+	<div id="e3c" class="picker" data-color="#00f"></div>
+	<h2>Example 4</h2>
+	<p>
+		Colorpicker with input field and "preview" function.
+	</p>
+	<div id="e4" class="picker"></div>
+	<input name="color" readonly="readonly" size="7" maxlength="7" value="#db35d0" />
 </body>
 </html>
