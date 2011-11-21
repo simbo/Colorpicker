@@ -9,8 +9,10 @@
 		body, input { background:#fff; color:#444; font-family:sans-serif; font-size:13px; line-height:1.231em; padding:0; margin:40px; }
 		a {	color:#06d;	text-decoration:none; }
 		h1 { font-size:1.6em; margin:0 0 1em 0; }
-		h2 { font-size:1.2em; margin:3em 0 1em 0; clear:both; }
+		h2 { font-size:1.2em; margin:3em 0 1em 0; clear:both; text-transform:uppercase; color:#666; border-bottom:1px solid #ccc; max-width:600px; }
+		h3 { font-size:1em; margin:2em 0 1em 0; clear:both; }
 		p { clear:both; margin:1em 0; padding:0; }
+		dd { margin:0 0 0.6em 2em; }
 		code { color:#666; background:#eee; padding:0 0.2em; }
 		input { margin:1em 0 0 0; padding:0.2em; border:1px solid #ccc; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; }
 		
@@ -89,10 +91,43 @@
 	</script>
 </head>
 <body>
-	<h1>Colorpicker Demo</h1>
-	<h2>Usage</h2>
-	<p><code>jQuery('#myElement').colorpicker( <em>options</em> );</code></p>
-	<p>Options:</p>
+	<h1>Colorpicker</h1>
+	<p>
+		Get sources and support for Colorpicker at <a href="http://github.com/simbo/Colorpicker">github.com/simbo/Colorpicker</a>.
+	</p>
+	<h2>Demo</h2>
+	<h3>Example 1</h3>
+	<p>
+		The simplest way. Default options, no handling.
+	</p>
+	<p>
+		<a href="#" id="e1">pick a color</a>
+	</p>
+	<h3>Example 2</h3>
+	<p>
+		Static value for <code>color</code> and handler for <code>onAccept</code>.
+	</p>
+	<p>
+		<a href="#" id="e2">pick a color</a>
+		<span></span>
+	</p>
+	<h3>Example 3</h3>
+	<p>
+		Multiple Colorpickers with relative position and data handling.
+	</p>
+	<div id="e3a" class="picker" data-color="#f00"></div>
+	<div id="e3b" class="picker" data-color="#0f0"></div>
+	<div id="e3c" class="picker" data-color="#00f"></div>
+	<h3>Example 4</h3>
+	<p>
+		Colorpicker with input field and "preview" function.
+	</p>
+	<div id="e4" class="picker"></div>
+	<input name="color" readonly="readonly" size="7" maxlength="7" value="#db35d0" />
+	<h2>Documentation</h2>
+	<h3>Usage</h3>
+	<p><code>jQuery('#myElement').colorpicker( [ <em>options</em> ] );</code></p>
+	<h3>Options</h3>
 	<dl>
 		<dt><code>color</code></dt>
 		<dd>a color (string with hexcode or array with rgb values) or a function that returns a color; default <code>[0,0,0]</code></dd>
@@ -107,36 +142,39 @@
 		<dt><code>position</code></dt>
 		<dd>jquery ui position object for positioning the main container; default centered on screen</dd>
 	</dl>
-	<p>
-		Get sources, download and support for Colorpicker at <a href="http://github.com/simbo/Colorpicker">github.com/simbo/Colorpicker</a>.
-	</p>
-	<h2>Example 1</h2>
-	<p>
-		The simplest way. Default options, no handling.
-	</p>
-	<p>
-		<a href="#" id="e1">pick a color</a>
-	</p>
-	<h2>Example 2</h2>
-	<p>
-		Static value for <code>color</code> and handler for <code>onAccept</code>.
-	</p>
-	<p>
-		<a href="#" id="e2">pick a color</a>
-		<span></span>
-	</p>
-	<h2>Example 3</h2>
-	<p>
-		Multiple Colorpickers with relative position and data handling.
-	</p>
-	<div id="e3a" class="picker" data-color="#f00"></div>
-	<div id="e3b" class="picker" data-color="#0f0"></div>
-	<div id="e3c" class="picker" data-color="#00f"></div>
-	<h2>Example 4</h2>
-	<p>
-		Colorpicker with input field and "preview" function.
-	</p>
-	<div id="e4" class="picker"></div>
-	<input name="color" readonly="readonly" size="7" maxlength="7" value="#db35d0" />
+	<h3>$.colorpicker Methods</h3>
+	<dl>
+		<dt><code>$.colorpicker.show( [ <em>options</em> [, <em>triggerElement</em> ] ] )</code></dt>
+		<dd>opens colorpicker dialog</dd>
+		<dt><code>$.colorpicker.hsv2rgb( <em>hsv</em> )</code></dt>
+		<dd>expects hsv value as array, returns matching rgb value as array</dd>
+		<dt><code>$.colorpicker.rgb2hsv( <em>rgb</em> )</code></dt>
+		<dd>expects rgb value as array, returns matching hsv value as array</dd>
+		<dt><code>$.colorpicker.hex2rgb( <em>hex</em> )</code></dt>
+		<dd>expects hex value as string, returns matching rgb value as array</dd>
+		<dt><code>$.colorpicker.rgb2hex( <em>rgb</em> )</code></dt>
+		<dd>expects rgb value as array, returns matching hex value as string</dd>
+		<dt><code>$.colorpicker.isHsv( <em>hsv</em> )</code></dt>
+		<dd>tests if given array contains valid hsv value</dd>
+		<dt><code>$.colorpicker.isRgb( <em>rgb</em> )</code></dt>
+		<dd>tests if given array contains valid rgb value</dd>
+		<dt><code>$.colorpicker.isHex( <em>hex</em> )</code></dt>
+		<dd>tests if given string contains valid hex value</dd>
+	</dl>
+	<h3>$.colorpicker Properties</h3>
+	<dl>
+		<dt><code>$.colorpicker.hsv</code></dt>
+		<dd>current hsv value as array</dd>
+		<dt><code>$.colorpicker.rgb</code></dt>
+		<dd>current rgb value as array</dd>
+		<dt><code>$.colorpicker.hex</code></dt>
+		<dd>current hex value as string</dd>
+		<dt><code>$.colorpicker.lastHsv</code></dt>
+		<dd>last hsv value as array</dd>
+		<dt><code>$.colorpicker.lastRgb</code></dt>
+		<dd>last rgb value as array</dd>
+		<dt><code>$.colorpicker.lastHex</code></dt>
+		<dd>last hex value as string</dd>
+	</dl>
 </body>
 </html>
